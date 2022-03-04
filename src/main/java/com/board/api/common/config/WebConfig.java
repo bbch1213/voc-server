@@ -11,10 +11,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @RequiredArgsConstructor
-public class WebConfig extends WebSecurityConfigurerAdapter {
+public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -25,6 +27,15 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:8080")
+                .allowedHeaders("*")
+                .allowedMethods("GET", "POST", "PUT", "PATCH")
+                .allowCredentials(true);
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
@@ -32,7 +43,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/api/voc/findByCustomerId", "/api/login").permitAll()
+                .antMatchers("/api/voc/findByCustomerId/**", "/api/login").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new JwtAuthenticationFilter((jwtTokenProvider)), UsernamePasswordAuthenticationFilter.class);
 

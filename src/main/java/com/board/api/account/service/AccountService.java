@@ -25,9 +25,8 @@ public class AccountService {
         Account account = accountRepository.findByUserId(loginForm.getUserId()).orElseThrow(LoginException::new);
         Response.Login loginResult = new Response.Login();
         if(!passwordEncoder.matches(loginForm.getPassword(), account.getPassword())) {
-            loginResult.setResult(LoginException.class.toString());
+            throw new LoginException();
         } else {
-            loginResult.setResult("로그인 성공");
             loginResult.setToken(jwtTokenProvider.createToken(account.getUserId(), account.getRole()));
         }
 

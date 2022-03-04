@@ -31,6 +31,7 @@ public class VocForm {
 
         @Data
         public static class VocToCustomer {
+            private long id;
             private String title;
             private VocStatus vocStatus;
             private LocalDateTime created_at;
@@ -38,6 +39,7 @@ public class VocForm {
 
         @Data
         public static class VocToUser {
+            private long id;
             private String customerId;
             private String title;
             private VocStatus vocStatus;

@@ -24,7 +24,6 @@ public class AccountForm {
         @Getter
         @Setter
         public static class Login {
-            private String result;
             private String token;
         }
     }

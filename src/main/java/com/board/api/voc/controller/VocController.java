@@ -1,6 +1,5 @@
 package com.board.api.voc.controller;
 
-import com.board.api.voc.entity.Voc;
 import com.board.api.voc.form.VocForm.Request;
 import com.board.api.voc.form.VocForm.Response;
 import com.board.api.voc.service.VocService;
@@ -16,10 +15,10 @@ public class VocController {
 
     private final VocService vocService;
 
-    @GetMapping("/findByCustomerId")
-    public Page<Response.VocToCustomer> getList(@RequestBody Request.Voc voc, Pageable pageable)
+    @GetMapping("/findByCustomerId/{customerId}")
+    public Page<Response.VocToCustomer> getList(@PathVariable String customerId, Pageable pageable)
     {
-        return vocService.getListByCustomerId(voc.getCustomerId(), pageable);
+        return vocService.getListByCustomerId(customerId, pageable);
     }
 
     @GetMapping("/findAll")
