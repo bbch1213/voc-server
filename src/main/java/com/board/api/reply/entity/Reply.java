@@ -1,9 +1,12 @@
-package com.board.api.voc.entity;
+package com.board.api.reply.entity;
 
 import com.board.api.account.entity.Account;
-import com.board.api.voc.enumerate.VocStatus;
 import com.board.api.common.base.Base;
-import lombok.*;
+import com.board.api.voc.entity.Voc;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -12,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Voc extends Base {
+public class Reply extends Base {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -20,19 +23,16 @@ public class Voc extends Base {
     private Long id;
 
     @Column(nullable = false, length = 30)
-    private String customerId;
-
-    @Column(nullable = false, length = 30)
     private String title;
 
     @Column(nullable = false, length = 300)
     private String content;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30 ,columnDefinition = "varchar(30) default 'NO_MANAGER'")
-    private VocStatus vocStatus = VocStatus.NO_MANAGER;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Account user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "voc_id")
+    private Voc voc;
 }

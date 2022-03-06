@@ -11,9 +11,8 @@ public interface VocMapper {
 
     VocMapper mapper = Mappers.getMapper(VocMapper.class);
 
-    Voc toVoc(Response.VocToCustomer voc);
-    Voc toVoc(Response.VocToUser voc);
+    Voc toVoc(Request.Register register);
 
-    Response.VocToCustomer toVocToCustomer(Voc voc);
-    Response.VocToUser toVocToUser(Voc voc);
+    Response.VocList toVocList(Voc voc);
+    Response.VocPage toVocPage(Voc voc);
 }

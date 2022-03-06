@@ -2,7 +2,13 @@ api:
   endpoint: /api
 server:
   port: 8081
+
+#default
+---
 spring:
+  config:
+    activate:
+      on-profile: default
   jwt:
     secret: 1234
   h2:
@@ -26,3 +32,27 @@ spring:
         format_sql: true
         show_sql: true
         ddl-auto: create-drop
+
+#테스트
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MYSQL;
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 1234
+    initialization-mode: always
+    data: classpath:db/data.sql
+    sql:
+      init:
+        mode: always
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL57Dialect
+          format_sql: true
+          show_sql: true
+          ddl-auto: create-drop

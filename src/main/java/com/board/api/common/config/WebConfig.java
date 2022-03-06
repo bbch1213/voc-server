@@ -43,7 +43,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/api/voc/findByCustomerId/**", "/api/login").permitAll()
+                .antMatchers("/api/voc/**", "/api/login").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new JwtAuthenticationFilter((jwtTokenProvider)), UsernamePasswordAuthenticationFilter.class);
 
