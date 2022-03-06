@@ -1,8 +1,9 @@
  * 프로젝트 구성
-JAVA VERSION = 8 ( 현업에서 사용하고 있는 가장 편한 버전이라 선택했습니다. )
-SPRING BOOT VERSION = 2.4.2 ( 현업에서는 더 낮은 버전을 사용하고 있지만 작업해본 경험이 있는 버전이라 선택했습니다. )
-DATABASE = H2 DATABASE ( 과제 확인 시 어플리케이션 실행, 기능테스트에 유용하기 때문에 선택했습니다. )
-사용한 기술 스택 : JPA, Spring Security, JWT 토큰, Mapstruct
+1. IDE = Intellij
+2. JAVA VERSION = 8 ( 현업에서 사용하고 있는 가장 편한 버전이라 선택했습니다. )
+3. SPRING BOOT VERSION = 2.4.2 ( 현업에서는 더 낮은 버전을 사용하고 있지만 작업해본 경험이 있는 버전이라 선택했습니다. )
+4. DATABASE = H2 DATABASE ( 과제 확인 시 어플리케이션 실행, 기능테스트에 유용하기 때문에 선택했습니다. )
+5. 사용한 기술 스택 : JPA, Spring Security, JWT 토큰, Mapstruct
 
  * 실행 방법
 mvn clean install 로 mapstruct 에서 자동으로 mapperImpl 을 만들도록 하고 ApiApplication 을 시작해야 합니다.
