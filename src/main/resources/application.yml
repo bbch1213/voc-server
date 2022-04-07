@@ -33,7 +33,7 @@ spring:
         show_sql: true
         ddl-auto: create-drop
 
-#테스트
+#test
 ---
 spring:
   config:

@@ -1,5 +1,6 @@
 package com.board.api.common.config;
 
+import com.board.api.account.enumerate.AccountRole;
 import com.board.api.common.helper.jwt.JwtAuthenticationFilter;
 import com.board.api.common.helper.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -37,16 +38,14 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/api/voc/**", "/api/login").permitAll()
-                .anyRequest().authenticated()
+                .anyRequest().hasRole("USER")
                 .and().addFilterBefore(new JwtAuthenticationFilter((jwtTokenProvider)), UsernamePasswordAuthenticationFilter.class);
-
     }
 
     @Override

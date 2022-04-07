@@ -31,7 +31,7 @@ class AccountServiceTest {
         Account account = new Account();
         account.setUserId("testA");
         account.setPassword("1234");
-        account.setRole(AccountRole.HAS_USER);
+        account.setRole(AccountRole.ROLE_USER);
         account.setName("Kim");
 
         when(accountRepository.findByUserId("testA"))

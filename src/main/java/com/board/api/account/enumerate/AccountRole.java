@@ -7,8 +7,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum AccountRole {
 
-    HAS_USER("user"),
-    HAS_ANONYMOUS("anonymous");
+    ROLE_USER("user"),
+    ROLE_ANONYMOUS("anonymous");
 
     private String description;
 }

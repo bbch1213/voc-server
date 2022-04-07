@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @RestController
@@ -20,29 +19,34 @@ public class VocController {
     private final VocService vocService;
     private final VocAdapter vocAdapter;
 
-    @GetMapping("/voc/findByCustomerId/{customerId}")
+    @GetMapping("/voc/customers/{customerId}")
     public Page<Response.VocList> getList(@PathVariable String customerId, Pageable pageable)
     {
         return vocService.getListByCustomerId(customerId, pageable);
     }
 
-    @GetMapping("/user/findAll")
+    @GetMapping("/voc/pages")
     public Page<Response.VocList> getList(Pageable pageable)
     {
         return vocService.getList(pageable);
     }
 
-    @GetMapping("/voc/findOne/{id}")
+    @GetMapping("/user/voc/no-managed")
+    public Page<Response.VocList> getListNoManaged(Pageable pageable) {
+        return vocService.getListNoManaged(pageable);
+    }
+
+    @GetMapping("/voc/{id}")
     public Response.VocPage getPage(@PathVariable Long id) {
         return vocService.getPage(id);
     }
 
-    @PutMapping("/user/voc/{id}/select")
-    public boolean selectVoc(@PathVariable Long id, HttpServletRequest request) {
-        return vocAdapter.changeStatus(request, id);
+    @PutMapping("/user/voc/{id}")
+    public boolean selectVoc(@PathVariable Long id) {
+        return vocAdapter.changeStatus(id);
     }
 
-    @PostMapping("/voc/register")
+    @PostMapping("/voc/add")
     public Response.Register register(@Valid @RequestBody Request.Register voc)
     {
         return vocService.register(voc);

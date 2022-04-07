@@ -26,6 +26,10 @@ public class VocService {
     }
 
     public Page<Response.VocList> getList(Pageable pageable) {
+        return vocRepository.findAll(pageable).map(mapper::toVocList);
+    }
+
+    public Page<Response.VocList> getListNoManaged(Pageable pageable) {
         return vocRepository.findAllByVocStatusEquals(VocStatus.NO_MANAGER, pageable).map(mapper::toVocList);
     }
 
@@ -50,7 +54,7 @@ public class VocService {
         return result;
     }
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public boolean changeStatus(Long vocId, Account account) {
         Voc voc = vocRepository.findOneById(vocId);
         if(voc.getVocStatus() == VocStatus.NO_MANAGER) {
