@@ -1,5 +1,8 @@
 package com.board.api.voc.service;
 
+import com.board.api.account.entity.Account;
+import com.board.api.account.enumerate.AccountRole;
+import com.board.api.voc.adapter.VocAdapter;
 import com.board.api.voc.entity.Voc;
 import com.board.api.voc.enumerate.VocStatus;
 import com.board.api.voc.form.VocForm;
@@ -27,11 +30,28 @@ class VocServiceTest {
     @InjectMocks
     VocService vocService;
 
+    @InjectMocks
+    VocAdapter vocAdapter;
+
     @Test
     void getVoc() {
+        Account admin = new Account();
+        admin.setUserId("testA");
+        admin.setPassword("1234");
+        admin.setRole(AccountRole.ROLE_ADMIN);
+        admin.setName("Kim");
+
+        Account user = new Account();
+        user.setUserId("customerA");
+        user.setPassword("1234");
+        user.setRole(AccountRole.ROLE_USER);
+        user.setName("Kang");
+
+
         Voc voc = new Voc();
         voc.setId(1L);
-        voc.setCustomerId("test");
+        voc.setAdmin(admin);
+        voc.setUser(user);
         voc.setTitle("test");
         voc.setContent("test");
         voc.setVocStatus(VocStatus.NO_MANAGER);
@@ -47,9 +67,15 @@ class VocServiceTest {
 
     @Test
     void register() {
+        Account user = new Account();
+        user.setUserId("customerA");
+        user.setPassword("1234");
+        user.setRole(AccountRole.ROLE_USER);
+        user.setName("Kang");
+
         Voc voc = new Voc();
         voc.setId(1L);
-        voc.setCustomerId("test");
+        voc.setUser(user);
         voc.setTitle("test");
         voc.setContent("test");
         voc.setVocStatus(VocStatus.NO_MANAGER);
@@ -58,11 +84,10 @@ class VocServiceTest {
         VocForm.Request.Register register = new VocForm.Request.Register();
         register.setTitle("test");
         register.setContent("test");
-        register.setCustomerId("test");
         when(vocRepository.save(voc))
                 .thenReturn(voc);
 
-        VocForm.Response.Register test = vocService.register(register);
+        VocForm.Response.Register test = vocAdapter.register(register);
 
         assertNotNull(test);
     }

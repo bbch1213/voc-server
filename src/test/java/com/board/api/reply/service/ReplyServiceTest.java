@@ -36,12 +36,11 @@ class ReplyServiceTest {
         Account account = new Account();
         account.setUserId("testA");
         account.setPassword("1234");
-        account.setRole(AccountRole.ROLE_USER);
+        account.setRole(AccountRole.ROLE_ADMIN);
         account.setName("Kim");
 
         Voc voc = new Voc();
         voc.setId(1L);
-        voc.setCustomerId("test");
         voc.setTitle("test");
         voc.setContent("test");
         voc.setVocStatus(VocStatus.MANAGED);
@@ -70,12 +69,11 @@ class ReplyServiceTest {
         Account account = new Account();
         account.setUserId("testA");
         account.setPassword("1234");
-        account.setRole(AccountRole.ROLE_USER);
+        account.setRole(AccountRole.ROLE_ADMIN);
         account.setName("Kim");
 
         Voc voc = new Voc();
         voc.setId(1L);
-        voc.setCustomerId("test");
         voc.setTitle("test");
         voc.setContent("test");
         voc.setVocStatus(VocStatus.MANAGED);

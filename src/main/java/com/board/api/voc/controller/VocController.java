@@ -22,7 +22,7 @@ public class VocController {
     @GetMapping("/voc/customers/{customerId}")
     public Page<Response.VocList> getList(@PathVariable String customerId, Pageable pageable)
     {
-        return vocService.getListByCustomerId(customerId, pageable);
+        return vocService.getListByUsername(customerId, pageable);
     }
 
     @GetMapping("/voc/pages")
@@ -49,6 +49,6 @@ public class VocController {
     @PostMapping("/voc/add")
     public Response.Register register(@Valid @RequestBody Request.Register voc)
     {
-        return vocService.register(voc);
+        return vocAdapter.register(voc);
     }
 }

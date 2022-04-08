@@ -16,7 +16,6 @@ public class VocForm {
         @Getter
         @Setter
         public static class Register {
-            private String customerId;
             private String title;
             private String content;
         }
@@ -29,19 +28,19 @@ public class VocForm {
         public static class VocList {
             private long id;
             private String title;
-            private String customerId;
             private VocStatus vocStatus;
             private LocalDateTime createdAt;
+            private BaseForm.Response.Account user;
         }
 
         @Data
         public static class VocPage {
-            private String customerId;
             private String title;
             private String content;
             private VocStatus vocStatus;
             private LocalDateTime createdAt;
             private BaseForm.Response.Account user;
+            private BaseForm.Response.Account admin;
         }
 
         @Data

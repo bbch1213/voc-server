@@ -20,9 +20,6 @@ public class Voc extends Base {
     private Long id;
 
     @Column(nullable = false, length = 30)
-    private String customerId;
-
-    @Column(nullable = false, length = 30)
     private String title;
 
     @Column(nullable = false, length = 300)
@@ -35,4 +32,8 @@ public class Voc extends Base {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Account user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id")
+    private Account admin;
 }

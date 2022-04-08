@@ -7,6 +7,7 @@ import com.board.api.account.repository.AccountRepository;
 import com.board.api.common.helper.exception.LoginException;
 import com.board.api.common.helper.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.h2.security.auth.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,14 @@ public class AccountService {
         } else {
             loginResult.setToken(jwtTokenProvider.createToken(account.getUserId(), account.getRole()));
             loginResult.setUserId(account.getUserId());
+            loginResult.setRole(account.getRole());
         }
 
         return loginResult;
+    }
+
+    public Account findOneById(Long id) throws AuthenticationException {
+        return accountRepository.findById(id).orElseThrow(AuthenticationException::new);
     }
 
     public Account findUser(String id) {

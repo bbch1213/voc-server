@@ -1,10 +1,12 @@
 package com.board.api.voc.service;
 
 import com.board.api.account.entity.Account;
+import com.board.api.common.helper.PrincipalHelper;
 import com.board.api.voc.entity.Voc;
 import com.board.api.voc.enumerate.VocStatus;
 import com.board.api.voc.form.VocForm.Response;
 import com.board.api.voc.form.VocForm.Request;
+import com.board.api.voc.predicate.VocPredicate;
 import com.board.api.voc.repository.VocRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,8 +23,8 @@ public class VocService {
 
     private final VocRepository vocRepository;
 
-    public Page<Response.VocList> getListByCustomerId(String id, Pageable pageable) {
-        return vocRepository.findAllByCustomerId(id, pageable).map(mapper::toVocList);
+    public Page<Response.VocList> getListByUsername(String id, Pageable pageable) {
+        return vocRepository.findAll(VocPredicate.searchToUserId(id), pageable).map(mapper::toVocList);
     }
 
     public Page<Response.VocList> getList(Pageable pageable) {
@@ -41,17 +43,8 @@ public class VocService {
         return mapper.toVocPage(vocRepository.findOneById(id));
     }
 
-    public Response.Register register(Request.Register register){
-        Response.Register result = new Response.Register();
-        try {
-            vocRepository.save(mapper.toVoc(register));
-            result.setCode("200");
-            result.setMessage("등록 완료");
-        }catch (Exception e) {
-            result.setCode("500");
-            result.setMessage("등록 실패 : " + e);
-        }
-        return result;
+    public void save(Voc voc) {
+        vocRepository.save(voc);
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED)

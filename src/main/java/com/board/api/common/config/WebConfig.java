@@ -44,7 +44,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers("/api/voc/**", "/api/login").permitAll()
-                .anyRequest().hasRole("USER")
+                .anyRequest().hasRole("ADMIN")
                 .and().addFilterBefore(new JwtAuthenticationFilter((jwtTokenProvider)), UsernamePasswordAuthenticationFilter.class);
     }
 

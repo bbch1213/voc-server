@@ -1,5 +1,6 @@
 package com.board.api.account.form;
 
+import com.board.api.account.enumerate.AccountRole;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,7 @@ public class AccountForm {
         public static class Login {
             private String userId;
             private String token;
+            private AccountRole role;
         }
     }
 }
