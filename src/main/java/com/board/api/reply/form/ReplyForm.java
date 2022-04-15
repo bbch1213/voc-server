@@ -27,7 +27,7 @@ public class ReplyForm {
 
         @Data
         public static class ReplyPage {
-            private BaseForm.Response.Account user;
+            private BaseForm.Response.Account createdBy;
             private String title;
             private String content;
             private LocalDateTime createdAt;

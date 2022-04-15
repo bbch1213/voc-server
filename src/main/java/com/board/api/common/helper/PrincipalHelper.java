@@ -4,7 +4,6 @@ import com.board.api.account.entity.Account;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 
 import java.util.Objects;
 
@@ -19,11 +18,18 @@ public class PrincipalHelper {
         return authentication;
     }
 
-    public static Long getId() {
+    public static Account getAccount() {
         if(Objects.isNull(getAuthentication())) {
             return null;
         }
         Account account = (Account) getAuthentication().getPrincipal();
-        return account.getId();
+        return account;
+    }
+
+    public static Long getId() {
+        if(Objects.isNull(getAuthentication())) {
+            return null;
+        }
+        return getAccount().getId();
     }
 }

@@ -29,10 +29,6 @@ public class Reply extends Base {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Account user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "voc_id")
     private Voc voc;
 }

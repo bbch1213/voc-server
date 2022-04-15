@@ -55,7 +55,7 @@ public class VocService {
         } else {
             voc.setVocStatus(VocStatus.COMPLETE);
         }
-        voc.setUser(account);
+        voc.setAdmin(account);
         try {
             vocRepository.save(voc);
         } catch (Exception e) {

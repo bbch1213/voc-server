@@ -10,7 +10,7 @@ public class VocPredicate {
         QVoc voc = QVoc.voc;
         BooleanBuilder builder = new BooleanBuilder();
 
-        builder.and(voc.user.userId.eq(userId));
+        builder.and(voc.createdBy.userId.eq(userId));
 
         return builder;
     }

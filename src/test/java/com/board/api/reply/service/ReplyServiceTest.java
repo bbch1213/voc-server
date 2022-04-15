@@ -5,6 +5,7 @@ import com.board.api.account.enumerate.AccountRole;
 import com.board.api.reply.entity.Reply;
 import com.board.api.reply.form.ReplyForm;
 import com.board.api.reply.repository.ReplyRepository;
+import com.board.api.role.entity.Role;
 import com.board.api.voc.entity.Voc;
 import com.board.api.voc.enumerate.VocStatus;
 import org.junit.jupiter.api.Test;
@@ -33,10 +34,17 @@ class ReplyServiceTest {
 
     @Test
     void getReply() {
+        List<Role> roleList = new ArrayList<>();
+        Role role = new Role();
+        role.setRoleType(AccountRole.ROLE_ADMIN);
+        role.setId(1L);
+        role.setDescription("관리자");
+        roleList.add(role);
+
         Account account = new Account();
         account.setUserId("testA");
         account.setPassword("1234");
-        account.setRole(AccountRole.ROLE_ADMIN);
+        account.setRoles(roleList);
         account.setName("Kim");
 
         Voc voc = new Voc();
@@ -50,7 +58,7 @@ class ReplyServiceTest {
         reply.setId(1L);
         reply.setTitle("test");
         reply.setContent("test");
-        reply.setUser(account);
+        reply.setCreatedBy(account);
         reply.setVoc(voc);
 
         List<Reply> list = new ArrayList<>();
@@ -66,10 +74,17 @@ class ReplyServiceTest {
 
     @Test
     void saveReply() {
+        List<Role> roleList = new ArrayList<>();
+        Role role = new Role();
+        role.setRoleType(AccountRole.ROLE_ADMIN);
+        role.setId(1L);
+        role.setDescription("관리자");
+        roleList.add(role);
+
         Account account = new Account();
         account.setUserId("testA");
         account.setPassword("1234");
-        account.setRole(AccountRole.ROLE_ADMIN);
+        account.setRoles(roleList);
         account.setName("Kim");
 
         Voc voc = new Voc();
@@ -83,7 +98,7 @@ class ReplyServiceTest {
         reply.setId(1L);
         reply.setTitle("test");
         reply.setContent("test");
-        reply.setUser(account);
+        reply.setCreatedBy(account);
         reply.setVoc(voc);
 
         when(replyRepository.save(reply))

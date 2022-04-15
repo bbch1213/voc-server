@@ -30,10 +30,6 @@ public class Voc extends Base {
     private VocStatus vocStatus = VocStatus.NO_MANAGER;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Account user;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     private Account admin;
 }

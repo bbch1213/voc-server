@@ -27,7 +27,7 @@ public class ReplyAdapter {
         Account account = accountService.findUser(register.getUserId());
         Voc voc = vocService.getVoc(register.getVocId());
         vocService.changeStatus(register.getVocId(), account);
-        reply.setUser(account);
+        reply.setCreatedBy(account);
         reply.setVoc(voc);
         reply.setTitle(register.getTitle());
         reply.setContent(register.getContent());

@@ -20,7 +20,6 @@ import static com.board.api.voc.mapper.VocMapper.mapper;
 @RequiredArgsConstructor
 public class VocAdapter {
 
-    private final JwtTokenProvider jwtTokenProvider;
     private final AccountService accountService;
     private final VocService vocService;
 
@@ -35,7 +34,7 @@ public class VocAdapter {
         VocForm.Response.Register result = new VocForm.Response.Register();
         try {
             Voc data = mapper.toVoc(register);
-            data.setUser(accountService.findOneById(PrincipalHelper.getId()));
+            data.setCreatedBy(accountService.findOneById(PrincipalHelper.getId()));
             vocService.save(data);
             result.setCode("200");
             result.setMessage("등록 완료");

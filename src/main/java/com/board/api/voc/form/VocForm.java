@@ -30,7 +30,7 @@ public class VocForm {
             private String title;
             private VocStatus vocStatus;
             private LocalDateTime createdAt;
-            private BaseForm.Response.Account user;
+            private BaseForm.Response.Account createdBy;
         }
 
         @Data
@@ -39,7 +39,7 @@ public class VocForm {
             private String content;
             private VocStatus vocStatus;
             private LocalDateTime createdAt;
-            private BaseForm.Response.Account user;
+            private BaseForm.Response.Account createdBy;
             private BaseForm.Response.Account admin;
         }
 

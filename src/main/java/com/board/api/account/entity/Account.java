@@ -1,10 +1,11 @@
 package com.board.api.account.entity;
 
-import com.board.api.account.enumerate.AccountRole;
 import com.board.api.common.base.Base;
+import com.board.api.role.entity.Role;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,7 +28,7 @@ public class Account extends Base {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private AccountRole role;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="account_role", joinColumns=@JoinColumn(name="account_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
+    private List<Role> roles;
 }

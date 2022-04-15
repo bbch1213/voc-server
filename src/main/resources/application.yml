@@ -21,17 +21,20 @@ spring:
     username: sa
     password: 1234
     initialization-mode: always
+    schema: classpath:db/schema.sql
     data: classpath:db/data.sql
   sql:
     init:
       mode: always
   jpa:
+    generate-ddl: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
         format_sql: true
         show_sql: true
-        ddl-auto: create-drop
+        hbm2ddl:
+          auto: none
 
 #test
 ---
@@ -45,14 +48,17 @@ spring:
     username: sa
     password: 1234
     initialization-mode: always
+    schema: classpath:db/schema.sql
     data: classpath:db/data.sql
     sql:
       init:
         mode: always
     jpa:
+      generate-ddl: false
       properties:
         hibernate:
           dialect: org.hibernate.dialect.MySQL57Dialect
           format_sql: true
           show_sql: true
-          ddl-auto: create-drop
+          hbm2ddl:
+            auto: none

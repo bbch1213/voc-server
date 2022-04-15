@@ -25,9 +25,9 @@ public class AccountService {
         if(!passwordEncoder.matches(loginForm.getPassword(), account.getPassword())) {
             throw new LoginException(loginForm.getUserId());
         } else {
-            loginResult.setToken(jwtTokenProvider.createToken(account.getUserId(), account.getRole()));
+            loginResult.setToken(jwtTokenProvider.createToken(account.getUserId(), account.getRoles()));
             loginResult.setUserId(account.getUserId());
-            loginResult.setRole(account.getRole());
+            loginResult.setRole(account.getRoles());
         }
 
         return loginResult;
